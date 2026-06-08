@@ -99,7 +99,7 @@ export default function AdminFormsTab({ token, showNotification }: AdminFormsTab
         }))
       };
 
-      const url = editingForm ? `/api/forms/${editingForm.id}` : '/api/forms';
+      const url = editingForm ? `https://mujerereslibre-backend.onrender.com/api/forms/${editingForm.id}` : 'https://mujerereslibre-backend.onrender.com/api/forms';
       const method = editingForm ? 'PUT' : 'POST';
 
       const res = await fetch(url, {

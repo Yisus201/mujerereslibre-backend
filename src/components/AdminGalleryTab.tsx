@@ -104,7 +104,7 @@ export default function AdminGalleryTab({ token, showNotification }: AdminGaller
     if (!newTitle || !newDate || !newCover) return showNotification('Completa todos los campos', 'error');
     setIsCreating(true);
     try {
-      const url = editingAlbum ? `/api/gallery/${editingAlbum.id}` : `/api/gallery`;
+      const url = editingAlbum ? `https://mujerereslibre-backend.onrender.com/api/gallery/${editingAlbum.id}` : `https://mujerereslibre-backend.onrender.com/api/gallery`;
       const method = editingAlbum ? 'PUT' : 'POST';
       const res = await fetch(url, {
         method,

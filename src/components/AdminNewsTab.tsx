@@ -82,7 +82,7 @@ export default function AdminNewsTab({ token, showNotification }: AdminNewsTabPr
     if (!newCatName || !newCatDesc || !newCatCover) return showNotification('Completa todos los campos', 'error');
     setIsCreatingCat(true);
     try {
-      const url = editingCategory ? `/api/news/${editingCategory.id}` : '/api/news';
+      const url = editingCategory ? `https://mujerereslibre-backend.onrender.com/api/news/${editingCategory.id}` : 'https://mujerereslibre-backend.onrender.com/api/news';
       const method = editingCategory ? 'PUT' : 'POST';
       const res = await fetch(url, {
         method,
@@ -159,7 +159,7 @@ export default function AdminNewsTab({ token, showNotification }: AdminNewsTabPr
     if (!activeCategory) return;
     setIsCreatingArticle(true);
     try {
-      const url = editingArticle ? `/api/news/articles/${editingArticle.id}` : `/api/news/${activeCategory.id}/articles`;
+      const url = editingArticle ? `https://mujerereslibre-backend.onrender.com/api/news/articles/${editingArticle.id}` : `https://mujerereslibre-backend.onrender.com/api/news/${activeCategory.id}/articles`;
       const method = editingArticle ? 'PUT' : 'POST';
       const res = await fetch(url, {
         method,

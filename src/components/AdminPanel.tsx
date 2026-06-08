@@ -387,7 +387,7 @@ export default function AdminPanel({ onUpdateData }: AdminPanelProps) {
     try {
       const serviceData = { ...editingService, image_url: finalImageUrl };
       const isEdit = !!editingService.id;
-      const url = isEdit ? `/api/services/${editingService.id}` : '/api/services';
+      const url = isEdit ? `https://mujerereslibre-backend.onrender.com/api/services/${editingService.id}` : 'https://mujerereslibre-backend.onrender.com/api/services';
       const method = isEdit ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
