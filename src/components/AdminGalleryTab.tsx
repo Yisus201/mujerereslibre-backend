@@ -95,7 +95,8 @@ export default function AdminGalleryTab({ token, showNotification }: AdminGaller
     });
     if (!res.ok) throw new Error('Error al subir imagen');
     const data = await res.json();
-    return data.url;
+    const fullUrl = data.url.startsWith('/uploads/') ? `https://mujerereslibre-backend.onrender.com${data.url}` : data.url;
+    return fullUrl;
   };
 
   const handleCreateAlbum = async (e: React.FormEvent) => {

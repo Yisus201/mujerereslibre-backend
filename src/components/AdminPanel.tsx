@@ -242,7 +242,8 @@ export default function AdminPanel({ onUpdateData }: AdminPanelProps) {
       });
       if (!uploadRes.ok) throw new Error('Error al subir imagen');
       const data = await uploadRes.json();
-      handleContentChange(key, data.url);
+      const fullUrl = data.url.startsWith('/uploads/') ? `https://mujerereslibre-backend.onrender.com${data.url}` : data.url;
+      handleContentChange(key, fullUrl);
     } catch(err) {
       showNotification('Error al subir la imagen.', 'error');
     }

@@ -66,7 +66,8 @@ export default function AdminNewsTab({ token, showNotification }: AdminNewsTabPr
     });
     if (!res.ok) throw new Error('Error al subir imagen');
     const data = await res.json();
-    return data.url;
+    const fullUrl = data.url.startsWith('/uploads/') ? `https://mujerereslibre-backend.onrender.com${data.url}` : data.url;
+    return fullUrl;
   };
 
   // Form Category
