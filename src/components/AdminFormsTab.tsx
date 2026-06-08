@@ -25,7 +25,7 @@ export default function AdminFormsTab({ token, showNotification }: AdminFormsTab
   const fetchForms = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch('/api/forms');
+      const res = await fetch('https://mujerereslibre-backend.onrender.com/api/forms');
       if (!res.ok) throw new Error('API error');
       const data = await res.json();
       setForms(Array.isArray(data) ? data : []);
@@ -120,7 +120,7 @@ export default function AdminFormsTab({ token, showNotification }: AdminFormsTab
   const handleDeleteForm = async (id: number) => {
     if (!confirm('¿Seguro que deseas eliminar este formulario y todas sus respuestas?')) return;
     try {
-      await fetch(`/api/forms/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
+      await fetch(`https://mujerereslibre-backend.onrender.com/api/forms/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
       showNotification('Formulario eliminado', 'success');
       fetchForms();
     } catch (e: any) {
@@ -132,7 +132,7 @@ export default function AdminFormsTab({ token, showNotification }: AdminFormsTab
     setViewingSubmissionsFormId(formId);
     setSubmissions([]);
     try {
-      const res = await fetch(`/api/forms/${formId}/submissions`, {
+      const res = await fetch(`https://mujerereslibre-backend.onrender.com/api/forms/${formId}/submissions`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       setSubmissions(await res.json());

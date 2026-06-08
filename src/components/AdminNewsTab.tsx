@@ -19,7 +19,7 @@ export default function AdminNewsTab({ token, showNotification }: AdminNewsTabPr
   const fetchCategories = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch('/api/news');
+      const res = await fetch('https://mujerereslibre-backend.onrender.com/api/news');
       const data = await res.json();
       setCategories(data);
       if (activeCategory) {
@@ -34,7 +34,7 @@ export default function AdminNewsTab({ token, showNotification }: AdminNewsTabPr
 
   const fetchAlbums = async () => {
     try {
-      const res = await fetch('/api/gallery');
+      const res = await fetch('https://mujerereslibre-backend.onrender.com/api/gallery');
       setAlbums(await res.json());
     } catch (e) {
       console.error(e);
@@ -43,7 +43,7 @@ export default function AdminNewsTab({ token, showNotification }: AdminNewsTabPr
 
   const fetchForms = async () => {
     try {
-      const res = await fetch('/api/forms');
+      const res = await fetch('https://mujerereslibre-backend.onrender.com/api/forms');
       setForms(await res.json());
     } catch (e) {
       console.error(e);
@@ -59,7 +59,7 @@ export default function AdminNewsTab({ token, showNotification }: AdminNewsTabPr
   const handleImageUpload = async (file: File): Promise<string> => {
     const formData = new FormData();
     formData.append('file', file);
-    const res = await fetch('/api/upload', {
+    const res = await fetch('https://mujerereslibre-backend.onrender.com/api/upload', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${token}` },
       body: formData,
@@ -103,7 +103,7 @@ export default function AdminNewsTab({ token, showNotification }: AdminNewsTabPr
   const handleDeleteCategory = async (id: number) => {
     if (!confirm('¿Seguro que deseas eliminar esta categoría y todas sus noticias?')) return;
     try {
-      await fetch(`/api/news/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
+      await fetch(`https://mujerereslibre-backend.onrender.com/api/news/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
       await fetchCategories();
       showNotification('Categoría eliminada.', 'success');
     } catch (e: any) {
@@ -141,7 +141,7 @@ export default function AdminNewsTab({ token, showNotification }: AdminNewsTabPr
 
   const handleToggleHideArticle = async (article: Article) => {
     try {
-      await fetch(`/api/news/articles/${article.id}`, { 
+      await fetch(`https://mujerereslibre-backend.onrender.com/api/news/articles/${article.id}`, { 
         method: 'PUT', 
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ ...article, is_hidden: !article.is_hidden })
@@ -181,7 +181,7 @@ export default function AdminNewsTab({ token, showNotification }: AdminNewsTabPr
   const handleDeleteArticle = async (id: number) => {
     if (!confirm('¿Eliminar noticia?')) return;
     try {
-      await fetch(`/api/news/articles/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
+      await fetch(`https://mujerereslibre-backend.onrender.com/api/news/articles/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
       await fetchCategories();
       showNotification('Noticia eliminada.', 'success');
     } catch (e: any) {

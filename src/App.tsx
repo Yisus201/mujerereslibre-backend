@@ -115,9 +115,9 @@ export default function App() {
     
     // Fetch initial data
     Promise.all([
-      fetch('/api/metrics').then(r => r.json()).catch(() => null),
-      fetch('/api/services').then(r => r.json()).catch(() => null),
-      fetch('/api/content').then(r => r.json()).catch(() => null)
+      fetch('https://mujerereslibre-backend.onrender.com/api/metrics').then(r => r.json()).catch(() => null),
+      fetch('https://mujerereslibre-backend.onrender.com/api/services').then(r => r.json()).catch(() => null),
+      fetch('https://mujerereslibre-backend.onrender.com/api/content').then(r => r.json()).catch(() => null)
     ]).then(([metricsData, servicesData, contentData]) => {
       if (metricsData) setMetrics(metricsData);
       if (servicesData) setServices(servicesData);

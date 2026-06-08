@@ -19,7 +19,7 @@ export default function News({ onArticleChange, previewMode = false }: NewsProps
   const [formModalId, setFormModalId] = useState<number | null>(null);
   
   useEffect(() => {
-    fetch('/api/news')
+    fetch('https://mujerereslibre-backend.onrender.com/api/news')
       .then(res => res.json())
       .then(data => {
         const visibleCategories = data.map((c: Category) => ({

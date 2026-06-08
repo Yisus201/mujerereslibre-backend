@@ -63,10 +63,10 @@ export default function AdminPanel({ onUpdateData }: AdminPanelProps) {
     try {
       const headers = { 'Authorization': `Bearer ${token}` };
       const [volunteersRes, servicesRes, metricsRes, contentRes] = await Promise.all([
-        fetch('/api/volunteers', { headers }).then((r) => r.json()),
-        fetch('/api/services').then((r) => r.json()),
-        fetch('/api/metrics').then((r) => r.json()),
-        fetch('/api/content').then((r) => r.json()),
+        fetch('https://mujerereslibre-backend.onrender.com/api/volunteers', { headers }).then((r) => r.json()),
+        fetch('https://mujerereslibre-backend.onrender.com/api/services').then((r) => r.json()),
+        fetch('https://mujerereslibre-backend.onrender.com/api/metrics').then((r) => r.json()),
+        fetch('https://mujerereslibre-backend.onrender.com/api/content').then((r) => r.json()),
       ]);
 
       if (Array.isArray(volunteersRes)) setVolunteers(volunteersRes);
@@ -85,7 +85,7 @@ export default function AdminPanel({ onUpdateData }: AdminPanelProps) {
 
   useEffect(() => {
     if (!token) {
-      fetch('/api/content')
+      fetch('https://mujerereslibre-backend.onrender.com/api/content')
         .then(r => r.json())
         .then(data => {
           if (data && typeof data === 'object') {
@@ -109,7 +109,7 @@ export default function AdminPanel({ onUpdateData }: AdminPanelProps) {
 
     setIsLoggingIn(true);
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch('https://mujerereslibre-backend.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -148,7 +148,7 @@ export default function AdminPanel({ onUpdateData }: AdminPanelProps) {
     e.preventDefault();
     setIsSavingMetrics(true);
     try {
-      const response = await fetch('/api/metrics', {
+      const response = await fetch('https://mujerereslibre-backend.onrender.com/api/metrics', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -199,7 +199,7 @@ export default function AdminPanel({ onUpdateData }: AdminPanelProps) {
         return;
       }
 
-      const response = await fetch('/api/content', {
+      const response = await fetch('https://mujerereslibre-backend.onrender.com/api/content', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -217,7 +217,7 @@ export default function AdminPanel({ onUpdateData }: AdminPanelProps) {
         throw new Error(errData.detail || `Error ${response.status} al actualizar contenido`);
       }
       
-      const refreshResponse = await fetch('/api/content');
+      const refreshResponse = await fetch('https://mujerereslibre-backend.onrender.com/api/content');
       const freshData = await refreshResponse.json();
       setContent(freshData);
       setOriginalContent(freshData);
@@ -235,7 +235,7 @@ export default function AdminPanel({ onUpdateData }: AdminPanelProps) {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      const uploadRes = await fetch('/api/upload', {
+      const uploadRes = await fetch('https://mujerereslibre-backend.onrender.com/api/upload', {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` },
         body: formData,
@@ -284,7 +284,7 @@ export default function AdminPanel({ onUpdateData }: AdminPanelProps) {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      const uploadRes = await fetch('/api/upload', {
+      const uploadRes = await fetch('https://mujerereslibre-backend.onrender.com/api/upload', {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` },
         body: formData,
@@ -345,7 +345,7 @@ export default function AdminPanel({ onUpdateData }: AdminPanelProps) {
       try {
         const formData = new FormData();
         formData.append('file', imageFile);
-        const uploadRes = await fetch('/api/upload', {
+        const uploadRes = await fetch('https://mujerereslibre-backend.onrender.com/api/upload', {
           method: 'POST',
           headers: { 'Authorization': `Bearer ${token}` },
           body: formData,
@@ -418,7 +418,7 @@ export default function AdminPanel({ onUpdateData }: AdminPanelProps) {
     if (!confirm('¿Estás seguro de que deseas eliminar este servicio?')) return;
 
     try {
-      const response = await fetch(`/api/services/${id}`, {
+      const response = await fetch(`https://mujerereslibre-backend.onrender.com/api/services/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` },
       });
@@ -439,7 +439,7 @@ export default function AdminPanel({ onUpdateData }: AdminPanelProps) {
     if (!confirm('¿Estás seguro de que deseas eliminar a este voluntario del registro?')) return;
 
     try {
-      const response = await fetch(`/api/volunteers/${id}`, {
+      const response = await fetch(`https://mujerereslibre-backend.onrender.com/api/volunteers/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` },
       });

@@ -15,7 +15,7 @@ export default function NewsPopup({ onOpenArticle }: NewsPopupProps) {
 
   useEffect(() => {
 
-    fetch('/api/news')
+    fetch('https://mujerereslibre-backend.onrender.com/api/news')
       .then(r => r.json())
       .then((categories: Category[]) => {
         if (!categories?.length) return;

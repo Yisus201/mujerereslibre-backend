@@ -32,10 +32,15 @@ export default function Footer({ content }: FooterProps) {
             <a href={`mailto:${content['footer.email']}`} className="text-xl sm:text-3xl font-normal hover:text-[#872075] transition-colors border-b border-white/20 pb-2">
               {content['footer.email']}
             </a>
-            <button className="bg-white hover:bg-[#872075] text-[#0a0a0a] hover:text-white rounded-full px-8 py-4 font-medium transition-colors duration-300 flex items-center gap-3 group">
+            <a 
+              href={import.meta.env.VITE_DONATION_URL || "https://wa.me/573000000000"} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-white hover:bg-[#872075] text-[#0a0a0a] hover:text-white rounded-full px-8 py-4 font-medium transition-colors duration-300 flex items-center gap-3 group inline-flex"
+            >
               Hacer una Donación
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+            </a>
           </div>
         </div>
 

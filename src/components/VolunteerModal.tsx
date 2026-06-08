@@ -189,7 +189,7 @@ export default function VolunteerModal({ isOpen, onClose, content }: VolunteerMo
     if (Object.keys(newErrors).length === 0) {
       setIsSubmitting(true);
       
-      fetch('/api/volunteers', {
+      fetch('https://mujerereslibre-backend.onrender.com/api/volunteers', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

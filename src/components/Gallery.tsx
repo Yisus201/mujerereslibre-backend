@@ -15,7 +15,7 @@ export default function Gallery({ onAlbumChange, previewMode = false }: GalleryP
   const [pendingOpenAlbumId, setPendingOpenAlbumId] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch('/api/gallery')
+    fetch('https://mujerereslibre-backend.onrender.com/api/gallery')
       .then(res => res.json())
       .then(data => {
         setAlbums(data.filter((a: Album) => !a.is_hidden));

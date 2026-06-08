@@ -16,7 +16,7 @@ export default function AdminGalleryTab({ token, showNotification }: AdminGaller
   const fetchAlbums = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch('/api/gallery');
+      const res = await fetch('https://mujerereslibre-backend.onrender.com/api/gallery');
       const data = await res.json();
       setAlbums(data);
       if (activeAlbum) {
@@ -32,7 +32,7 @@ export default function AdminGalleryTab({ token, showNotification }: AdminGaller
 
   const fetchArticles = async () => {
     try {
-      const res = await fetch('/api/news');
+      const res = await fetch('https://mujerereslibre-backend.onrender.com/api/news');
       const cats: Category[] = await res.json();
       setArticles(cats.flatMap(c => c.articles));
     } catch (e) {
@@ -72,7 +72,7 @@ export default function AdminGalleryTab({ token, showNotification }: AdminGaller
 
   const handleToggleHideAlbum = async (album: Album) => {
     try {
-      const res = await fetch(`/api/gallery/${album.id}`, {
+      const res = await fetch(`https://mujerereslibre-backend.onrender.com/api/gallery/${album.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ ...album, is_hidden: !album.is_hidden })
@@ -88,7 +88,7 @@ export default function AdminGalleryTab({ token, showNotification }: AdminGaller
   const handleImageUpload = async (file: File): Promise<string> => {
     const formData = new FormData();
     formData.append('file', file);
-    const res = await fetch('/api/upload', {
+    const res = await fetch('https://mujerereslibre-backend.onrender.com/api/upload', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${token}` },
       body: formData,
@@ -129,7 +129,7 @@ export default function AdminGalleryTab({ token, showNotification }: AdminGaller
   const handleDeleteAlbum = async (id: number) => {
     if (!confirm('¿Seguro que deseas eliminar este álbum y todas sus fotos?')) return;
     try {
-      await fetch(`/api/gallery/${id}`, {
+      await fetch(`https://mujerereslibre-backend.onrender.com/api/gallery/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -147,7 +147,7 @@ export default function AdminGalleryTab({ token, showNotification }: AdminGaller
     setIsUploadingPhoto(true);
     try {
       const url = await handleImageUpload(e.target.files[0]);
-      const res = await fetch(`/api/gallery/${activeAlbum.id}/photos`, {
+      const res = await fetch(`https://mujerereslibre-backend.onrender.com/api/gallery/${activeAlbum.id}/photos`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -168,7 +168,7 @@ export default function AdminGalleryTab({ token, showNotification }: AdminGaller
   const handleDeletePhoto = async (photoId: number) => {
     if (!confirm('¿Eliminar foto?')) return;
     try {
-      await fetch(`/api/gallery/photos/${photoId}`, {
+      await fetch(`https://mujerereslibre-backend.onrender.com/api/gallery/photos/${photoId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

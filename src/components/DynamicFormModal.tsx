@@ -25,7 +25,7 @@ export default function DynamicFormModal({ formId, onClose }: DynamicFormModalPr
   }, []);
 
   useEffect(() => {
-    fetch(`/api/forms`)
+    fetch(`https://mujerereslibre-backend.onrender.com/api/forms`)
       .then(res => res.json())
       .then(data => {
         const foundForm = data.find((f: CustomForm) => f.id === formId);
@@ -52,7 +52,7 @@ export default function DynamicFormModal({ formId, onClose }: DynamicFormModalPr
     setError('');
 
     try {
-      const res = await fetch(`/api/forms/${formId}/submit`, {
+      const res = await fetch(`https://mujerereslibre-backend.onrender.com/api/forms/${formId}/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data: JSON.stringify(formData) })
