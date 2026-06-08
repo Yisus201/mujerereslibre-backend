@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Shader, Swirl, ChromaFlow, FlutedGlass, FilmGrain } from 'shaders/react';
 
 import type { SiteContent } from '../types';
+import { formatWhatsAppUrl } from '../utils/whatsapp';
 
 const TextRoll = ({ text }: { text: string }) => (
   <div className="h-[20px] overflow-hidden flex flex-col">
@@ -84,7 +85,7 @@ export default function Hero({ content, onOpenVolunteer }: HeroProps) {
               <span className="text-[13px] text-gray-600">{time} en Colombia</span>
             </div>
             <a
-              href={content['footer.whatsapp'] ? `https://wa.me/${content['footer.whatsapp']}?text=${encodeURIComponent(content['hero.donate_msg'] || '¡Hola! Quiero hacer una donación a la Fundación Mujer eres Libre.')}` : '#contacto'}
+              href={formatWhatsAppUrl(content['footer.whatsapp'], content['hero.donate_msg'])}
               target={content['footer.whatsapp'] ? '_blank' : undefined}
               rel={content['footer.whatsapp'] ? 'noopener noreferrer' : undefined}
               className="group bg-[#872075] hover:bg-[#6a195c] text-white text-[13px] font-medium rounded-full pl-5 pr-2 py-2 flex items-center gap-3 transition-colors"
@@ -133,7 +134,7 @@ export default function Hero({ content, onOpenVolunteer }: HeroProps) {
           </div>
           <div className="flex flex-col gap-3">
             <a
-              href={content['footer.whatsapp'] ? `https://wa.me/${content['footer.whatsapp']}?text=${encodeURIComponent(content['hero.donate_msg'] || '¡Hola! Quiero hacer una donación a la Fundación Mujer eres Libre.')}` : '#contacto'}
+              href={formatWhatsAppUrl(content['footer.whatsapp'], content['hero.donate_msg'])}
               target={content['footer.whatsapp'] ? '_blank' : undefined}
               rel={content['footer.whatsapp'] ? 'noopener noreferrer' : undefined}
               onClick={() => setIsMenuOpen(false)}
@@ -169,7 +170,7 @@ export default function Hero({ content, onOpenVolunteer }: HeroProps) {
 
         <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-5 items-start">
           <a
-            href={content['footer.whatsapp'] ? `https://wa.me/${content['footer.whatsapp']}?text=${encodeURIComponent(content['hero.donate_msg'] || '¡Hola! Quiero hacer una donación a la Fundación Mujer eres Libre.')}` : '#contacto'}
+            href={formatWhatsAppUrl(content['footer.whatsapp'], content['hero.donate_msg'])}
             target={content['footer.whatsapp'] ? '_blank' : undefined}
             rel={content['footer.whatsapp'] ? 'noopener noreferrer' : undefined}
             className="group bg-[#872075] hover:bg-[#6a195c] text-white text-[13px] sm:text-[14px] font-medium rounded-full pl-5 sm:pl-6 pr-2 py-2 flex items-center gap-4 transition-colors duration-300"
