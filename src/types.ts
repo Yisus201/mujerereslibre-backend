@@ -41,6 +41,15 @@ export interface Album {
   linked_article_id?: number | null;
 }
 
+export interface NewsComment {
+  id: number;
+  article_id: number;
+  name: string;
+  text: string;
+  date: string;
+  created_at: string;
+}
+
 export interface Article {
   id: number;
   title: string;
@@ -52,6 +61,7 @@ export interface Article {
   is_popup?: boolean;
   linked_album_id?: number | null;
   linked_form_id?: number | null;
+  comments?: NewsComment[];
 }
 
 export interface Category {

@@ -92,6 +92,19 @@ class NewsArticle(Base):
     linked_form_id = Column(Integer, ForeignKey("custom_forms.id"), nullable=True)
     
     category = relationship("NewsCategory", back_populates="articles")
+    comments = relationship("NewsComment", back_populates="article", cascade="all, delete-orphan")
+
+class NewsComment(Base):
+    __tablename__ = "news_comments"
+
+    id = Column(Integer, primary_key=True, index=True)
+    article_id = Column(Integer, ForeignKey("news_articles.id"))
+    name = Column(String, nullable=False)
+    text = Column(String, nullable=False)
+    date = Column(String, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    article = relationship("NewsArticle", back_populates="comments")
 
 class CustomForm(Base):
     __tablename__ = "custom_forms"

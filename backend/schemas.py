@@ -117,8 +117,26 @@ class ArticleCreate(ArticleBase):
 class ArticleResponse(ArticleBase):
     id: int
     category_id: int
+    comments: List['NewsCommentResponse'] = []
     class Config:
         from_attributes = True
+
+class NewsCommentBase(BaseModel):
+    name: str
+    text: str
+    date: str
+
+class NewsCommentCreate(NewsCommentBase):
+    pass
+
+class NewsCommentResponse(NewsCommentBase):
+    id: int
+    article_id: int
+    created_at: datetime
+    class Config:
+        from_attributes = True
+
+ArticleResponse.model_rebuild()
 
 class CategoryBase(BaseModel):
     name: str

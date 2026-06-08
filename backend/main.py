@@ -586,6 +586,24 @@ def delete_article(article_id: int, db: Session = Depends(get_db), current_user:
     db.commit()
     return {"message": "Article deleted"}
 
+@app.post("/api/news/articles/{article_id}/comments", response_model=schemas.NewsCommentResponse)
+def create_comment(article_id: int, comment: schemas.NewsCommentCreate, db: Session = Depends(get_db)):
+    db_article = db.query(models.NewsArticle).filter(models.NewsArticle.id == article_id).first()
+    if not db_article:
+        raise HTTPException(status_code=404, detail="Article not found")
+        
+    db_comment = models.NewsComment(
+        article_id=article_id,
+        name=comment.name,
+        text=comment.text,
+        date=comment.date
+    )
+    db.add(db_comment)
+    db.commit()
+    db.refresh(db_comment)
+    return db_comment
+
+
 @app.get("/api/forms", response_model=List[schemas.CustomFormResponse])
 def get_forms(db: Session = Depends(get_db)):
     return db.query(models.CustomForm).all()

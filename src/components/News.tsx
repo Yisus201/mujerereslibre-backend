@@ -108,7 +108,7 @@ export default function News({ onArticleChange, previewMode = false }: NewsProps
     if (shareUrl) window.open(shareUrl, '_blank', 'width=600,height=400');
   };
 
-  const handleAddComment = (e: React.FormEvent) => {
+  const handleAddComment = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!activeArticleId || !newCommentName.trim() || !newCommentText.trim()) return;
 
@@ -118,6 +118,7 @@ export default function News({ onArticleChange, previewMode = false }: NewsProps
       date: new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
     };
 
+    // Update locally immediately
     setCommentsByArticle(prev => ({
       ...prev,
       [activeArticleId]: [...(prev[activeArticleId] || []), newComment]
@@ -125,9 +126,25 @@ export default function News({ onArticleChange, previewMode = false }: NewsProps
 
     setNewCommentName('');
     setNewCommentText('');
+
+    // POST to backend
+    try {
+      await fetch(`https://mujerereslibre-backend.onrender.com/api/news/articles/${activeArticleId}/comments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newComment)
+      });
+    } catch (error) {
+      console.error("Failed to post comment", error);
+    }
   };
 
-  const articleComments = activeArticleId ? (commentsByArticle[activeArticleId] || []) : [];
+  const articleComments = activeArticle ? [
+    ...(activeArticle.comments || []),
+    ...(activeArticleId ? (commentsByArticle[activeArticleId] || []) : [])
+  ] : [];
+
+
 
   return (
     <section className={!activeArticle ? "py-24 bg-white" : "pt-12 pb-24 bg-white min-h-screen"} id="noticias">
