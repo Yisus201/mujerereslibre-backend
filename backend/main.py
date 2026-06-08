@@ -422,13 +422,36 @@ async def upload_image(
             detail=f"Tipo de archivo no permitido. Solo imágenes."
         )
 
-    filename = f"{uuid.uuid4().hex}{ext}"
-    file_path = os.path.join(UPLOAD_DIR, filename)
+    imgbb_api_key = os.environ.get("IMGBB_API_KEY")
 
-    with open(file_path, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
+    if imgbb_api_key:
+        # Subir a ImgBB en la nube
+        contents = await file.read()
+        encoded_image = base64.b64encode(contents).decode("utf-8")
         
-    return {"url": f"/uploads/{filename}"}
+        response = requests.post(
+            "https://api.imgbb.com/1/upload",
+            data={
+                "key": imgbb_api_key,
+                "image": encoded_image,
+                "name": os.path.splitext(file.filename)[0]
+            }
+        )
+        
+        if response.status_code == 200:
+            data = response.json()
+            return {"url": data["data"]["url"]}
+        else:
+            raise HTTPException(status_code=500, detail="Error uploading image to ImgBB")
+    else:
+        # Fallback a almacenamiento local (se borra en Render)
+        filename = f"{uuid.uuid4().hex}{ext}"
+        file_path = os.path.join(UPLOAD_DIR, filename)
+
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+            
+        return {"url": f"/uploads/{filename}"}
 
 
 # Gallery Endpoints
