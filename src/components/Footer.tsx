@@ -120,8 +120,8 @@ export default function Footer({ content }: FooterProps) {
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6 text-[13px] font-normal text-gray-500 pt-8 border-t border-white/10">
           <p>© {new Date().getFullYear()} Fundación Mujer eres libre. Todos los derechos reservados.</p>
           <div className="flex flex-wrap justify-center gap-8">
-            <a href="#" className="hover:text-white transition-colors">Política de Privacidad</a>
-            <a href="#" className="hover:text-white transition-colors">Términos de Servicio</a>
+            <Link to="/privacidad" className="hover:text-white transition-colors">Política de Privacidad</Link>
+            <Link to="/terminos" className="hover:text-white transition-colors">Términos de Servicio</Link>
             <a href="/#admin" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Panel Administrativo</a>
           </div>
         </div>

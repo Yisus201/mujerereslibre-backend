@@ -9,6 +9,8 @@ import AdminPanel from './components/AdminPanel';
 import Gallery from './components/Gallery';
 import News from './components/News';
 import NewsPopup from './components/NewsPopup';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfService from './components/TermsOfService';
 import type { Metric, ServiceCard, SiteContent } from './types';
 
 const DEFAULT_METRICS: Metric[] = [
@@ -151,6 +153,14 @@ export default function App() {
 
   if (location.pathname.includes('/admin')) {
     return <AdminPanel />;
+  }
+
+  if (location.pathname === '/privacidad') {
+    return <PrivacyPolicy />;
+  }
+
+  if (location.pathname === '/terminos') {
+    return <TermsOfService />;
   }
 
   const isFullNewsView = location.pathname.includes('/noticias');
