@@ -10,6 +10,8 @@ from database import engine, get_db
 import os
 import uuid
 import shutil
+import requests
+import base64
 from dotenv import load_dotenv
 
 load_dotenv()
