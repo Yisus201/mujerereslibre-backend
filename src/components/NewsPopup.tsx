@@ -22,8 +22,7 @@ export default function NewsPopup({ onOpenArticle }: NewsPopupProps) {
 
         let pinned: Article | null = null;
         let pinnedCategory: Category | null = null;
-        let latest: Article | null = null;
-        let latestCategory: Category | null = null;
+
 
         categories.forEach(cat => {
           cat.articles?.forEach(article => {
@@ -32,15 +31,12 @@ export default function NewsPopup({ onOpenArticle }: NewsPopupProps) {
               pinned = article;
               pinnedCategory = cat;
             }
-            if (!latest || article.id > latest.id) {
-              latest = article;
-              latestCategory = cat;
-            }
+
           });
         });
 
-        const chosen = pinned ?? latest;
-        const chosenCat = pinnedCategory ?? latestCategory;
+        const chosen = pinned;
+        const chosenCat = pinnedCategory;
         if (!chosen) return;
 
         setFeaturedArticle(chosen);
