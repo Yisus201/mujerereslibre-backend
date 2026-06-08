@@ -7,7 +7,11 @@ from sqlalchemy.orm import sessionmaker
 load_dotenv()
 
 # Usa la variable de entorno, o cae de forma predeterminada a SQLite
-SQLALCHEMY_DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///./database.db")
+db_url = os.environ.get("DATABASE_URL", "sqlite:///./database.db")
+if db_url and db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
+
+SQLALCHEMY_DATABASE_URL = db_url
 
 connect_args = {"check_same_thread": False} if SQLALCHEMY_DATABASE_URL.startswith("sqlite") else {}
 
