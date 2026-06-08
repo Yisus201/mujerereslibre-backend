@@ -1,4 +1,4 @@
-import { ArrowRight, Building2, Mail, Phone, ExternalLink } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { SiteContent } from '../types';
 import { formatWhatsAppUrl } from '../utils/whatsapp';
