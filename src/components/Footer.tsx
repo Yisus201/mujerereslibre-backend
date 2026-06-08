@@ -35,7 +35,7 @@ export default function Footer({ content }: FooterProps) {
               {content['footer.email']}
             </a>
             <a 
-              href={formatWhatsAppUrl(content['footer.whatsapp'])}
+              href={formatWhatsAppUrl(content['footer.whatsapp'], content['hero.donate_msg'])}
               target="_blank" 
               rel="noopener noreferrer"
               className="bg-white hover:bg-[#872075] text-[#0a0a0a] hover:text-white rounded-full px-8 py-4 font-medium transition-colors duration-300 flex items-center gap-3 group inline-flex"
@@ -84,7 +84,7 @@ export default function Footer({ content }: FooterProps) {
             <p className="text-gray-300 text-[15px] font-normal">{content['footer.phone2']}</p>
             {content['footer.whatsapp'] && (
               <a
-                href={formatWhatsAppUrl(content['footer.whatsapp'])}
+                href={formatWhatsAppUrl(content['footer.whatsapp'], content['hero.donate_msg'])}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-[#25D366] transition-colors text-[15px] font-normal flex items-center gap-3"
