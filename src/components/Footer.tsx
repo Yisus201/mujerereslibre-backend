@@ -122,7 +122,7 @@ export default function Footer({ content }: FooterProps) {
           <div className="flex flex-wrap justify-center gap-8">
             <Link to="/privacidad" className="hover:text-white transition-colors">Política de Privacidad</Link>
             <Link to="/terminos" className="hover:text-white transition-colors">Términos de Servicio</Link>
-            <a href="/#admin" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Panel Administrativo</a>
+            <Link to="/admin" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Panel Administrativo</Link>
           </div>
         </div>
 
