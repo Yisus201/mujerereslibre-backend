@@ -1,4 +1,5 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Building2, Mail, Phone, ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import type { SiteContent } from '../types';
 
 interface FooterProps {
@@ -65,13 +66,13 @@ export default function Footer({ content }: FooterProps) {
           </div>
 
           {/* Navigation */}
-          <div className="flex flex-col gap-5">
-            <h4 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gray-500 mb-2">Navegación</h4>
-            <a href="#esencia" className="text-gray-300 hover:text-white transition-colors text-[15px] font-normal">Nuestra Esencia</a>
-            <a href="#impacto" className="text-gray-300 hover:text-white transition-colors text-[15px] font-normal">Impacto Social</a>
-            <a href="#servicios" className="text-gray-300 hover:text-white transition-colors text-[15px] font-normal">Áreas de Servicio</a>
-            <a href="#galeria" className="text-gray-300 hover:text-white transition-colors text-[15px] font-normal">Galería</a>
-            <a href="#noticias" className="text-gray-300 hover:text-white transition-colors text-[15px] font-normal">Noticias</a>
+          <div className="flex flex-col gap-3">
+            <h4 className="text-white font-semibold mb-2">Secciones</h4>
+            <Link to="/esencia" className="text-gray-300 hover:text-white transition-colors text-[15px] font-normal">Nuestra Esencia</Link>
+            <Link to="/impacto" className="text-gray-300 hover:text-white transition-colors text-[15px] font-normal">Impacto Social</Link>
+            <Link to="/servicios" className="text-gray-300 hover:text-white transition-colors text-[15px] font-normal">Áreas de Servicio</Link>
+            <Link to="/galeria" className="text-gray-300 hover:text-white transition-colors text-[15px] font-normal">Galería</Link>
+            <Link to="/noticias" className="text-gray-300 hover:text-white transition-colors text-[15px] font-normal">Noticias</Link>
           </div>
 
           {/* Contact */}

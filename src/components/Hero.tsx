@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, Clock, Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Shader, Swirl, ChromaFlow, FlutedGlass, FilmGrain } from 'shaders/react';
 
 import type { SiteContent } from '../types';
@@ -19,12 +20,12 @@ interface HeroProps {
 }
 
 const NAV_LINKS = [
-  { name: 'Esencia', href: '#esencia' },
-  { name: 'Impacto', href: '#impacto' },
-  { name: 'Servicios', href: '#servicios' },
-  { name: 'Galería', href: '#galeria' },
-  { name: 'Noticias', href: '#noticias' },
-  { name: 'Contacto', href: '#contacto' }
+  { name: 'Esencia', href: '/esencia' },
+  { name: 'Impacto', href: '/impacto' },
+  { name: 'Servicios', href: '/servicios' },
+  { name: 'Galería', href: '/galeria' },
+  { name: 'Noticias', href: '/noticias' },
+  { name: 'Contacto', href: '/contacto' }
 ];
 
 export default function Hero({ content, onOpenVolunteer }: HeroProps) {
@@ -68,10 +69,10 @@ export default function Hero({ content, onOpenVolunteer }: HeroProps) {
               )}
             </div>
             <div className="hidden md:flex items-center gap-6">
-              {NAV_LINKS.map((link) => (
-                <a key={link.name} href={link.href} className="text-[14px] text-gray-900 hover:text-[#872075] transition-colors duration-300 font-medium">
+                {NAV_LINKS.map((link) => (
+                <Link key={link.name} to={link.href} className="text-[14px] text-gray-900 hover:text-[#872075] transition-colors duration-300 font-medium">
                   {link.name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -120,14 +121,14 @@ export default function Hero({ content, onOpenVolunteer }: HeroProps) {
           </div>
           <div className="flex flex-col gap-4 mb-8">
             {NAV_LINKS.map((link) => (
-              <a 
+              <Link 
                 key={link.name} 
-                href={link.href} 
+                to={link.href} 
                 onClick={() => setIsMenuOpen(false)}
                 className="text-[28px] sm:text-[32px] font-medium text-gray-900 leading-tight hover:text-[#872075] transition-colors"
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
           <div className="flex flex-col gap-3">

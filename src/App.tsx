@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Hero from './components/Hero';
 import About from './components/About';
 import CaseStudies from './components/CaseStudies';
@@ -99,7 +100,7 @@ const DEFAULT_CONTENT: SiteContent = {
 };
 
 export default function App() {
-  const [currentPath, setCurrentPath] = useState(window.location.hash || '#');
+  const location = useLocation();
   const [isVolunteerOpen, setIsVolunteerOpen] = useState(false);
   const [metrics, setMetrics] = useState<Metric[]>(DEFAULT_METRICS);
   const [services, setServices] = useState<ServiceCard[]>(DEFAULT_SERVICES);
@@ -108,11 +109,6 @@ export default function App() {
   const [isViewingGallery, setIsViewingGallery] = useState(false);
 
   useEffect(() => {
-    const handleHashChange = () => {
-      setCurrentPath(window.location.hash || '#');
-    };
-    window.addEventListener('hashchange', handleHashChange);
-    
     // Fetch initial data
     Promise.all([
       fetch('https://mujerereslibre-backend.onrender.com/api/metrics').then(r => r.json()).catch(() => null),
@@ -123,16 +119,42 @@ export default function App() {
       if (servicesData) setServices(servicesData);
       if (contentData) setContent(contentData);
     });
-
-    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  if (currentPath === '#admin') {
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === '/' || path === '') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    
+    if (path.includes('/admin')) {
+      window.scrollTo(0, 0);
+      return;
+    }
+    
+    // For specific pages, scroll to top
+    if (path.includes('/noticias') || path.includes('/galeria')) {
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    // For sections, scroll to them
+    const sectionId = path.replace(/\//g, '');
+    if (sectionId) {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location.pathname]);
+
+  if (location.pathname.includes('/admin')) {
     return <AdminPanel />;
   }
 
-  const isFullNewsView = currentPath === '#noticias';
-  const isFullGalleryView = currentPath === '#galeria';
+  const isFullNewsView = location.pathname.includes('/noticias');
+  const isFullGalleryView = location.pathname.includes('/galeria');
   const isIsolatedView = isReadingArticle || isViewingGallery || isFullNewsView || isFullGalleryView;
 
   return (

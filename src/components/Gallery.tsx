@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { Album } from '../types';
 import { ArrowLeft, ArrowRight, Image as ImageIcon, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface GalleryProps {
   onAlbumChange?: (isViewing: boolean) => void;
@@ -95,9 +96,9 @@ export default function Gallery({ onAlbumChange, previewMode = false }: GalleryP
           <>
             {!previewMode && (
               <div className="mb-8">
-                <a href="#" className="inline-flex items-center gap-2 text-[13px] font-semibold text-gray-500 hover:text-[#872075] transition-colors uppercase tracking-wide">
+                <Link to="/" className="inline-flex items-center gap-2 text-[13px] font-semibold text-gray-500 hover:text-[#872075] transition-colors uppercase tracking-wide">
                   <ArrowLeft size={16} /> Volver al Inicio
-                </a>
+                </Link>
               </div>
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
@@ -146,13 +147,13 @@ export default function Gallery({ onAlbumChange, previewMode = false }: GalleryP
             </div>
             {previewMode && albums.length > 0 && (
               <div className="mt-16 text-center">
-                <a 
-                  href="#galeria" 
+                <Link 
+                  to="/galeria" 
                   className="inline-flex items-center justify-center bg-white text-[#872075] border-2 border-[#872075] w-14 h-14 rounded-full hover:bg-[#872075] hover:text-white transition-all shadow-sm"
                   title="Ver toda la galería"
                 >
                   <ArrowRight size={24} />
-                </a>
+                </Link>
               </div>
             )}
           </>

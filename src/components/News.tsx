@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowRight, Tag, Plus } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import type { Category, Article } from '../types';
 import DynamicFormModal from './DynamicFormModal';
 
@@ -149,9 +150,9 @@ export default function News({ onArticleChange, previewMode = false }: NewsProps
           <>
             {!previewMode && (
               <div className="mb-8">
-                <a href="#" className="inline-flex items-center gap-2 text-[13px] font-semibold text-gray-500 hover:text-[#872075] transition-colors uppercase tracking-wide">
+                <Link to="/" className="inline-flex items-center gap-2 text-[13px] font-semibold text-gray-500 hover:text-[#872075] transition-colors uppercase tracking-wide">
                   <ArrowLeft size={16} /> Volver al Inicio
-                </a>
+                </Link>
               </div>
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-8 lg:gap-x-12">
@@ -198,13 +199,13 @@ export default function News({ onArticleChange, previewMode = false }: NewsProps
             </div>
             {previewMode && categories.length > 0 && (
               <div className="mt-16 text-center">
-                <a 
-                  href="#noticias" 
+                <Link 
+                  to="/noticias" 
                   className="inline-flex items-center justify-center bg-white text-[#872075] border-2 border-[#872075] w-14 h-14 rounded-full hover:bg-[#872075] hover:text-white transition-all shadow-sm"
                   title="Ver todas las noticias"
                 >
                   <ArrowRight size={24} />
-                </a>
+                </Link>
               </div>
             )}
           </>
